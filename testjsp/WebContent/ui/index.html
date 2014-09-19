@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf8">
+	<title>Tree Lines - jQuery EasyUI Demo</title>
+	<link rel="stylesheet" type="text/css" href="../jquery-easyui-1.4/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="../jquery-easyui-1.4/themes/icon.css">
+	<!-- <link rel="stylesheet" type="text/css" href="../jquery-easyui-1.4/demo/demo.css"> -->
+	<script type="text/javascript" src="../jquery-easyui-1.4/jquery.min.js"></script>
+	<script type="text/javascript" src="../jquery-easyui-1.4/jquery.easyui.min.js"></script>
+</head>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#projmenu').tree({
+			onClick:function(node){
+				openTab(node.resid,node.text,'htmltest.html');
+			}
+		});
+		
+		$('#resmenu').tree({
+			onClick:function(node){
+				openTabSec(node.text,'../test.jsp?id='+node.resid);
+			}
+		});
+	});
+	
+	function openTab(resid,title,url){
+		if($('#centerTab').tabs('exists',title)){
+			$('#centerTab').tabs('select',title);
+		}else{
+			$('#centerTab').tabs('add',{
+				id:resid,
+				title:title,
+				href:url,
+				closable:true
+			});
+		}	
+	};
+	
+	function openTabSec(title,url){
+		if($('#centerTab').tabs('exists',title)){
+			$('#centerTab').tabs('select',title);
+		}else{
+			$('#centerTab').tabs('add',{
+				title:title,
+				content:'<iframe height=100% width=100% board=0 src='+ url +'></iframe>' ,
+				closable:true
+			});
+		}	
+	};
+</script>
+
+<body  >
+
+ <div class="easyui-layout" fit="true" >
+ 	<div data-options="region:'north',title:'North Title',collapsible:false,href:'sitebanner.html'" style="height:100px">Test Web UI</div>
+ 	<div data-options="region:'south',title:'South Title',collapsible:false,href:'copyright.html'" style="height:100px"></div>
+ 	<div data-options="region:'west',title:'West Title',collapsible:false,split:true" style="width:200px">
+ 		<div class="easyui-accordion" fit="true">
+ 			<div title="Projects" >
+ 				<ul id="projmenu" class="easyui-tree" url="../getprojmenu" >
+ 				</ul>
+ 			</div>
+ 			<div title="Resources">
+ 			 	<ul id="resmenu" class="easyui-tree" url="../getresourceitem">
+ 				</ul>
+ 			</div>
+ 			<div title="Others">
+				<ul class="easyui-tree" >
+					<li><span><a onclick="openTab('001','addProject', 'addproject.html')"> Add Project Information</a></span></li>
+				</ul>
+			</div>
+ 		</div>
+ 	</div>
+ 	<div data-options="region:'center',title:'Center Title'">
+ 		<div id="centerTab" class="easyui-tabs" fit="true" >
+ 		</div>
+ 	</div>
+ </div>
+</body>
+</html>
