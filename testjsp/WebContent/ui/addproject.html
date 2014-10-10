@@ -26,13 +26,13 @@
 	</table>
 	
 	<div id="toolbar">
-		<a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newProj()">New Proj</a>
-		<a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editProj()">Edit Proj</a>
-		<a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="deleteProj()">Delete Proj</a>
+		<a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newProj()">添加</a>
+		<a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editProj()">修改</a>
+		<a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="deleteProj()">删除</a>
 	</div>
 	
 	<div id="modifydlg" class="easyui-dialog" style="width:400px;height:300px;padding:10px 20px" closed="true" buttons="#modifydlgbtn">
-		<div class="ftitle">Project Information</div>
+		<div class="ftitle">项目信息</div>
 		<form id="fm" method="post">
 			<div class="fitem">
 				<label>项目编号</label>
@@ -57,7 +57,7 @@
 <script type="text/javascript">
 	var url;
 	function newProj(){
-		$('#modifydlg').dialog('open').dialog('setTitle','Add Project');
+		$('#modifydlg').dialog('open').dialog('setTitle','添加项目');
 		$('#fm').form('clear');
 		url='../saveproj';
 	}
@@ -65,7 +65,7 @@
 	function editProj(){
 		var row=$('#showprojdg').datagrid('getSelected');
 		if(row){
-			$('#modifydlg').dialog('open').dialog('setTitle','Edit Project');
+			$('#modifydlg').dialog('open').dialog('setTitle','修改项目');
 			$('#fm').form('load',row);
 			url='../updateproj?id='+row.id;
 		}
@@ -95,7 +95,7 @@
 	function deleteProj(){
 		var row=$('#showprojdg').datagrid('getSelected');
 		if(row){
-			$.messager.confirm('Confirm','are you sure to delete this project?',function(r){
+			$.messager.confirm('Confirm','确定删除项目?',function(r){
 				if(r){
 					$.post('../deleteproj',{id:row.id},function(result){
 						if(result.success){

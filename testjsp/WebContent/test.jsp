@@ -58,7 +58,7 @@
 	
 	var url;
 	function newRes(id){
-		$('#modifydlg').dialog('open').dialog('setTitle','Add Resect');
+		$('#modifydlg').dialog('open').dialog('setTitle','添加资源信息');
 		 $('#fm').form('clear');
 		 $('#dlgResID').combobox('setValue',id);
 		 $('#sechba').combobox('setValue','0');
@@ -69,7 +69,7 @@
 	function editRes(){
 		var row=$('#showResdg').datagrid('getSelected');
 		if(row){
-			$('#modifydlg').dialog('open').dialog('setTitle','Edit Resect');
+			$('#modifydlg').dialog('open').dialog('setTitle','修改资源信息');
 			$('#fm').form('load',row);
 			url='/testjsp/updateRes?id='+row.id;
 		}
@@ -99,7 +99,7 @@
 	function deleteRes(){
 		var row=$('#showResdg').datagrid('getSelected');
 		if(row){
-			$.messager.confirm('Confirm','are you sure to delete this Resect?',function(r){
+			$.messager.confirm('Confirm','确定删除本条记录?',function(r){
 				if(r){
 					$.post('/testjsp/deleteRes',{id:row.id},function(result){
 						if(result.success){
@@ -149,13 +149,14 @@
 	</table> --%>
 	
 	<div id="toolbar">
-		<a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newRes(<%out.print(id);%>)">New Res</a>
-		<a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editRes()">Edit Res</a>
-		<a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="deleteRes()">Delete Res</a>
+		<a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newRes(<%out.print(id);%>)">添加</a>
+		<a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editRes()">修改</a>
+		<a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="deleteRes()">删除</a>
 	</div>
 	
 	<div id="modifydlg" class="easyui-dialog" style="width:500px;height:400px;padding:10px 20px" closed="true" buttons="#modifydlgbtn">
-		<div class="ftitle">Resource Information</div>
+		<div class="ftitle">详细信息展示</div>
+		
 		<form id="fm" method="post">
 			<div class="fitem" >
 				<label width="50">设备种类</label>
@@ -204,8 +205,8 @@
 	</div>
 	
 	<div id="modifydlgbtn">
-		<a  class="easyui-linkbutton" iconCls="icon-ok" onclick="saveRes()">Save</a>
-		<a  class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$(modifydlg).dialog('close')">Cancel</a>
+		<a  class="easyui-linkbutton" iconCls="icon-ok" onclick="saveRes()">保存</a>
+		<a  class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$(modifydlg).dialog('close')">取消</a>
 	</div>
 	
 </body>

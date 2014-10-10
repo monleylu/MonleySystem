@@ -32,7 +32,7 @@ public class GetResource extends HttpServlet {
 		int resid=Integer.parseInt(request.getParameter("resid"));
 		int page=Integer.parseInt(request.getParameter("page"));
 		int rows=Integer.parseInt(request.getParameter("rows"));
-		int offset=(page-1)*rows;
+		int offset=((page-1)*rows)>=0?((page-1)*rows):1;
 		
 		ArrayList<ServiceDevInformation> al=new ArrayList<ServiceDevInformation>();
 		ServiceDevInformationSum allRes=new ServiceDevInformationSum();
@@ -41,7 +41,7 @@ public class GetResource extends HttpServlet {
 		try {
 			
 		 	
-		 	ResultSet rs1=db.query("select count(1) as total from serviceDevInformation" );
+		 	ResultSet rs1=db.query("select count(1) as total from serviceDevInformation where resid=?",resid );
 		 	rs1.next();
 		 	allRes.setTotal(rs1.getInt("total"));
 		 	ResultSet rs=db.query("select serviceDevInformation.id,serviceDevInformation.resid,machinetype,inet_ntoa(ip) as ip,ostype,diskinfo,memory,hba,position,mode,serviceDevInformation.description ,projCatalog.name from serviceDevInformation inner join ProjCatalog on serviceDevInformation.mode=ProjCatalog.resid where serviceDevInformation.resid = ? limit ?, ? " ,resid,offset,rows);
@@ -68,6 +68,13 @@ public class GetResource extends HttpServlet {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			try {
+				db.closeConn();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 	}

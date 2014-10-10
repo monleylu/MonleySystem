@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf8">
-	<title>Tree Lines - jQuery EasyUI Demo</title>
+	<title>机房管理系统首页</title>
 	<link rel="stylesheet" type="text/css" href="../jquery-easyui-1.4/themes/default/easyui.css">
 	<link rel="stylesheet" type="text/css" href="../jquery-easyui-1.4/themes/icon.css">
 	<!-- <link rel="stylesheet" type="text/css" href="../jquery-easyui-1.4/demo/demo.css"> -->
@@ -14,7 +14,8 @@
 	$(document).ready(function(){
 		$('#projmenu').tree({
 			onClick:function(node){
-				openTab(node.resid,node.text,'htmltest.html');
+				/* openTab(node.resid,node.text,'htmltest.html'); */
+				openTabSec(node.text,'../showassociateres.jsp?id='+node.resid);
 			}
 		});
 		
@@ -44,7 +45,7 @@
 		}else{
 			$('#centerTab').tabs('add',{
 				title:title,
-				content:'<iframe height=100% width=100% board=0 src='+ url +'></iframe>' ,
+				content:'<iframe height=100% width=100% frameborder=0 board=0 src='+ url +'></iframe>' ,
 				closable:true
 			});
 		}	
@@ -54,9 +55,9 @@
 <body  >
 
  <div class="easyui-layout" fit="true" >
- 	<div data-options="region:'north',title:'North Title',collapsible:false,href:'sitebanner.html'" style="height:100px">Test Web UI</div>
- 	<div data-options="region:'south',title:'South Title',collapsible:false,href:'copyright.html'" style="height:100px"></div>
- 	<div data-options="region:'west',title:'West Title',collapsible:false,split:true" style="width:200px">
+ 	<div data-options="region:'north',collapsible:false,href:'sitebanner.html'" style="height:100px"></div>
+ 	<div data-options="region:'south',collapsible:false,href:'copyright.html'" style="height:100px"></div>
+ 	<div data-options="region:'west',collapsible:false,split:true" style="width:200px">
  		<div class="easyui-accordion" fit="true">
  			<div title="Projects" >
  				<ul id="projmenu" class="easyui-tree" url="../getprojmenu" >
@@ -68,12 +69,12 @@
  			</div>
  			<div title="Others">
 				<ul class="easyui-tree" >
-					<li><span><a onclick="openTab('001','addProject', 'addproject.html')"> Add Project Information</a></span></li>
+					<li><span><a onclick="openTab('001','addProject', 'addproject.html')"> 添加项目信息</a></span></li>
 				</ul>
 			</div>
  		</div>
  	</div>
- 	<div data-options="region:'center',title:'Center Title'">
+ 	<div data-options="region:'center'">
  		<div id="centerTab" class="easyui-tabs" fit="true" >
  		</div>
  	</div>

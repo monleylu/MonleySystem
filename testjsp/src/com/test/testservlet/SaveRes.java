@@ -95,6 +95,13 @@ public class SaveRes extends HttpServlet {
 			String strjson=JSON.toJSONString(e1);
 			out.print(strjson);
 			e.printStackTrace();
+		}finally{
+			try {
+				db.closeConn();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 

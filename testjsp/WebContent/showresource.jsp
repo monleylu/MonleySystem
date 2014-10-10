@@ -85,6 +85,7 @@
 	}
 	/* out.print(id); */
 %>
+
 <table id="showResdg" title="Add Resect Information" class="easyui-datagrid" fit="true"
 	url="/testjsp/getresource?resid=<%out.print(id);%>"  pagination="true" toolbar="#toolbar" rownumbers="true" fitColumns="true" singleSelect="true">
 		<thead>
